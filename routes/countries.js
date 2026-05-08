@@ -1,22 +1,20 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const data = require("../data/countries.json");
+const data = require('../data/countries.json');
 
-router.get("/", (request, response) =>{
-    response.status(200).json(data);
+router.get('/', (req, res) =>{
+    res.status(200).json(data);
 });
 
-router.get("/:CountryId", (request, response) =>{
-   
-    const requestedCountryId = request.params.CountryId;
-
-    const country = data.countries.filter(countryInData => {
-        if(countryInData.id.toString() === requestedCountryId) {
+router.get('/:countryId', (req, res) =>{
+    const requestedCountryId = req.params.countryId; // "1"
+    const country = data.countries.filter(countryInData => { //1
+       if(countryInData.id.toString() === requestedCountryId) {
             return countryInData;
-        }
-    });
-    response.status(200).json(country);
-
+       }
+    }); 
+    
+    res.status(200).json(country);
 });
 
 module.exports = router;
